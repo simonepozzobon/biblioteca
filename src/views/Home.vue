@@ -1,38 +1,40 @@
 <template>
-<el-row
-    type="flex"
-    justify="center"
->
-    <el-col
-        :span="6"
-        class="form"
-    >
-        <h2 class="form__title">Login</h2>
-        <el-input
-            class="form__input"
-            placeholder="Email"
-            v-model="email"
-            clearable
-        />
-        <el-input
-            class="form__input"
-            placeholder="Password"
-            v-model="password"
-            show-password
-        />
-        <el-button
-            type="primary"
-            @click="attemptLogin"
-        >
-            Entra
-        </el-button>
-    </el-col>
-</el-row>
+<div>
+    <ui-single-film
+        v-for="(record, i) in records"
+        :key="i"
+        :record="record"
+    />
+</div>
 </template>
 
 <script>
+import {
+    UiSingleFilm
+}
+from '../ui'
 export default {
     name: 'Home',
+    components: {
+        UiSingleFilm,
+    },
+    data: function () {
+        return {
+            records: []
+        }
+    },
+    methods: {
+        getData: function () {
+            this.$http.get('catalogo').then(response => {
+                if (response.data.success) {
+                    this.records = response.data.archives
+                }
+            })
+        }
+    },
+    created: function () {
+        this.getData()
+    },
 }
 </script>
 

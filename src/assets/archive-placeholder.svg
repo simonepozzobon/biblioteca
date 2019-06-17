@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920px" height="720px" viewBox="0 0 1920 720" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>archive-placeholder</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M230.716296,137.703704 L230.716296,116.672593 L209.685185,116.672593 L209.685185,137.703704 L230.716296,137.703704 Z M230.716296,179.265185 L230.716296,158.734815 L209.685185,158.734815 L209.685185,179.265185 L230.716296,179.265185 Z M230.716296,221.327407 L230.716296,200.296296 L209.685185,200.296296 L209.685185,221.327407 L230.716296,221.327407 Z M126.562222,137.703704 L126.562222,116.672593 L105.531111,116.672593 L105.531111,137.703704 L126.562222,137.703704 Z M126.562222,179.265185 L126.562222,158.734815 L105.531111,158.734815 L105.531111,179.265185 L126.562222,179.265185 Z M126.562222,221.327407 L126.562222,200.296296 L105.531111,200.296296 L105.531111,221.327407 L126.562222,221.327407 Z M230.716296,75.1111111 L251.747407,75.1111111 L251.747407,262.888889 L230.716296,262.888889 L230.716296,241.857778 L209.685185,241.857778 L209.685185,262.888889 L126.562222,262.888889 L126.562222,241.857778 L105.531111,241.857778 L105.531111,262.888889 L84.5,262.888889 L84.5,75.1111111 L105.531111,75.1111111 L105.531111,96.1422222 L126.562222,96.1422222 L126.562222,75.1111111 L209.685185,75.1111111 L209.685185,96.1422222 L230.716296,96.1422222 L230.716296,75.1111111 Z" id="path-1"></path>
+        <filter x="-14.3%" y="-12.8%" width="128.7%" height="125.6%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="8" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.05 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="archive-placeholder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#D8D8D8" fill-rule="nonzero" x="0" y="0" width="1920" height="720"></rect>
+        <g id="archive" transform="translate(791.000000, 191.000000)" fill-rule="nonzero">
+            <g id="tape">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use fill="#E9E9E9" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>
