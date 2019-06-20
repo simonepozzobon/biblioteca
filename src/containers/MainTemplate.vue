@@ -14,19 +14,23 @@
         >
             <div class="logout">
                 <el-button
-                    @click="$root.goTo('search')"
-                    icon="el-icon-search"
+                    @click="logout"
+                    icon="el-icon-switch-button"
+                    type="danger"
+                    round
                 >
-                    Ricerca
+                    logout
                 </el-button>
             </div>
             <div class="logout">
-                <el-link
-                    type="primary"
-                    @click="logout"
+                <el-button
+                    @click="$root.goTo('search')"
+                    icon="el-icon-search"
+                    type="info"
+                    round
                 >
-                    logout
-                </el-link>
+                    Ricerca
+                </el-button>
             </div>
             <div class="avatar">
                 <span class="avatar__initial">{{ this.initial }}</span>
