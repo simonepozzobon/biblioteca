@@ -79,11 +79,13 @@ export default {
         shortDescription: function () {
             // https://stackoverflow.com/questions/1199352/smart-way-to-shorten-long-strings-with-javascript
             let n = 130
-            if (this.record.description.length > 130) {
-                return this.record.description.substr(0, n - 1) + '...'
+            if (this.record.hasOwnProperty('description')) {
+                if (this.record.description.length > 130) {
+                    return this.record.description.substr(0, n - 1) + '...'
+                }
+                return this.record.description
             }
-
-            return this.record.description
+            return null
         },
     },
     filters: {
