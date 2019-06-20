@@ -2,7 +2,7 @@
 <el-container class="main-container">
     <el-header class="header">
         <div class="header__title">
-            <el-link @click="goToHome">
+            <el-link @click="$root.goTo('home')">
                 <h1>
                     Biblioteca di Morando
                 </h1>
@@ -12,6 +12,14 @@
             class="header__logout"
             v-if="logged"
         >
+            <div class="logout">
+                <el-button
+                    @click="$root.goTo('search')"
+                    icon="el-icon-search"
+                >
+                    Ricerca
+                </el-button>
+            </div>
             <div class="logout">
                 <el-link
                     type="primary"
@@ -58,7 +66,6 @@ export default {
     },
     methods: {
         getUser: function () {
-            console.log(this.$store.get('user'));
             if (this.$store.get('user')) {
                 this.logged = true
                 this.name = this.$store.get('user').name
@@ -66,11 +73,6 @@ export default {
             else {
                 this.logged = false
             }
-        },
-        goToHome: function () {
-            this.$router.push({
-                name: 'home'
-            })
         },
         logout: function () {
             this.$http.get('auth/logout').then(response => {

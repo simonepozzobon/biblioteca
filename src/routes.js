@@ -3,6 +3,7 @@ import Login from './views/Login.vue'
 import MainTemplate from './containers/MainTemplate.vue'
 import RecordSingle from './views/RecordSingle.vue'
 import Register from './views/Register.vue'
+import Search from './views/Search.vue'
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
                 path: 'register',
                 name: 'register',
                 component: Register,
+            },
+            {
+                path: 'search',
+                name: 'search',
+                component: Search,
             },
             {
                 path: 'record-single/:id',
