@@ -26,6 +26,12 @@
         >
             Entra
         </el-button>
+        <el-button
+            type="warning"
+            @click="$root.goTo('register')"
+        >
+            Effettua Registrazione
+        </el-button>
     </el-col>
 </el-row>
 </template>

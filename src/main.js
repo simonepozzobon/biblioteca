@@ -51,7 +51,8 @@ router.beforeEach((to, from, next) => {
             next();
         }
         
-        else if (typeof user == 'undefined' || typeof token == 'undefined' || !auth) {
+        else if (user && (typeof token == 'undefined' || !auth)) {
+            console.log('ce user');
             let data = new FormData()
             data.append('id', user.id)
             data.append('email', user.email)
@@ -74,7 +75,7 @@ router.beforeEach((to, from, next) => {
     
                     // eslint-disable-next-line
                     console.log('login dal cookie non riuscito');
-                    router.push({ name: 'login' })
+                    router.push('/')
                     return false
                 }
             })

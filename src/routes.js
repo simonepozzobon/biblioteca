@@ -2,6 +2,7 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import MainTemplate from './containers/MainTemplate.vue'
 import RecordSingle from './views/RecordSingle.vue'
+import Register from './views/Register.vue'
 
 const routes = [
     {
@@ -18,6 +19,11 @@ const routes = [
                 path: 'login',
                 name: 'login',
                 component: Login
+            },
+            {
+                path: 'register',
+                name: 'register',
+                component: Register,
             },
             {
                 path: 'record-single/:id',

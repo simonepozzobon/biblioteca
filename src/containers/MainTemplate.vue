@@ -8,7 +8,10 @@
                 </h1>
             </el-link>
         </div>
-        <div class="header__logout">
+        <div
+            class="header__logout"
+            v-if="logged"
+        >
             <div class="logout">
                 <el-link
                     type="primary"
@@ -36,26 +39,54 @@ export default {
     name: 'MainTemplate',
     data: function () {
         return {
+            logged: false,
             name: null
         }
     },
     computed: {
         initial: function () {
-            return this.name.substring(0, 2).toUpperCase()
+            if (this.name) {
+                return this.name.substring(0, 2).toUpperCase()
+            }
+            return null
         },
     },
+    watch: {
+        '$route.params': function (route) {
+            this.getUser()
+        }
+    },
     methods: {
+        getUser: function () {
+            console.log(this.$store.get('user'));
+            if (this.$store.get('user')) {
+                this.logged = true
+                this.name = this.$store.get('user').name
+            }
+            else {
+                this.logged = false
+            }
+        },
         goToHome: function () {
             this.$router.push({
                 name: 'home'
             })
         },
         logout: function () {
-            // incomplete
+            this.$http.get('auth/logout').then(response => {
+                this.$store.set('user', null)
+                this.$store.set('token', null)
+                delete this.$http.defaults.headers.common.Authorization
+
+                this.name = null
+                this.$root.goTo('login')
+            })
         }
     },
     created: function () {
-        this.name = this.$store.get('user').name
+        this.getUser()
+
+
     },
 }
 </script>
