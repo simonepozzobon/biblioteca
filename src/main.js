@@ -114,5 +114,8 @@ new Vue({
             this.$router.push({ name: name })
         }
     },
+    mounted: function() {
+        this.$router.push('/')
+    },
     render: h => h(App),
 }).$mount('#app')
