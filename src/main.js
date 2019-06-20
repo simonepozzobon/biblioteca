@@ -52,6 +52,7 @@ router.beforeEach((to, from, next) => {
         }
         
         else if (user && (typeof token == 'undefined' || !auth)) {
+            // eslint-disable-next-line
             console.log('ce user');
             let data = new FormData()
             data.append('id', user.id)

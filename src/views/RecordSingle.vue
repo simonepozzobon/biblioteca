@@ -19,8 +19,19 @@
     >
         <el-col :span="24">
             <div class="record-single__image">
+                <div
+                    class="embed-responsive embed-responsive-16by9"
+                    v-if="record.video && record.video.url"
+                >
+                    <iframe
+                        class="embed-responsive-item"
+                        :src="record.video.url | setUri"
+                        allowfullscreen
+                    >
+                    </iframe>
+                </div>
                 <el-image
-                    v-if="record.thumb && this.type != 'streaming'"
+                    v-else-if="record.thumb"
                     :src="record.thumb.slide_img | setPath"
                     fit="cover"
                 />
@@ -28,6 +39,7 @@
                     v-else
                     :src="archivePlaceholderImg"
                 />
+
             </div>
         </el-col>
     </el-row>
@@ -44,15 +56,16 @@
                 />
             </div>
             <div class="record-single__options">
-                <ui-title title="Dettagli" />
-                bla bla bla
-            </div>
-            <div class="record-single__options">
                 <ui-title title="Descrizione" />
                 {{ record.description }}
             </div>
         </el-col>
-        <el-col :span="4">sidebar</el-col>
+        <el-col :span="4">
+            <ui-title title="Dettagli" />
+            <span v-if="record.country">{{ record.country.name }}, </span>
+            <span v-if="record.year">{{ record.year }}, </span>
+            <span v-if="record.duration">{{ record.duration }}'</span>
+        </el-col>
     </el-row>
 </div>
 </template>
@@ -98,7 +111,23 @@ export default {
         setPath: function (path) {
             let url = '/storage' + path.replace('/public', '')
             return process.env.VUE_APP_BASE + url
-        }
+        },
+        setUri: function (url) {
+            if (url) {
+                // eslint-disable-next-line
+                url.match(/(http:|https:|)\/\/(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(\&\S+)?/);
+
+                if (RegExp.$3.indexOf('youtu') > -1) {
+                    return 'https://www.youtube.com/embed/' + RegExp.$6
+                }
+                else if (RegExp.$3.indexOf('vimeo') > -1) {
+                    // console.log('vimeoooooo');
+                    return 'https://player.vimeo.com/video/' + RegExp.$6
+                }
+                return null
+            }
+            return null
+        },
     },
     methods: {
         getData: function () {
@@ -106,7 +135,7 @@ export default {
             this.$http.get(url).then(response => {
                 if (response.data.success) {
                     this.record = response.data.archive
-                    console.log(this.type);
+                    // console.log(this.record);
                 }
             })
         },
@@ -123,6 +152,39 @@ export default {
 <style lang="scss" scoped>
 @import '../scss/styles.scss';
 
+.embed-responsive {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+
+    &::before {
+        display: block;
+        content: "";
+    }
+
+    .embed-responsive-item,
+    embed,
+    iframe,
+    object,
+    video {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    &.embed-responsive-16by9 {
+        &::before {
+            padding-top: percentage(9 / 16);
+        }
+    }
+}
+
 .record-single {
     // display: flex;
     // flex-direction: column;
@@ -136,6 +198,8 @@ export default {
     }
 
     &__image {
+        min-height: 100px;
+
         .el-image {
             width: 100%;
         }

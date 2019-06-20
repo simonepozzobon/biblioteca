@@ -60,7 +60,7 @@ export default {
         },
     },
     watch: {
-        '$route.params': function (route) {
+        '$route.params': function () {
             this.getUser()
         }
     },
@@ -75,7 +75,7 @@ export default {
             }
         },
         logout: function () {
-            this.$http.get('auth/logout').then(response => {
+            this.$http.get('auth/logout').then(() => {
                 this.$store.set('user', null)
                 this.$store.set('token', null)
                 delete this.$http.defaults.headers.common.Authorization

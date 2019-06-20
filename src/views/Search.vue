@@ -4,10 +4,7 @@
     justify="center"
 >
     <el-col :span="8">
-        <el-tabs
-            v-model="activeSearch"
-            @tab-click="handleClick"
-        >
+        <el-tabs v-model="activeSearch">
             <el-tab-pane
                 label="Ricerca Semplice"
                 name="simple"
@@ -114,11 +111,7 @@ export default {
             simple_query: '',
         }
     },
-    methods: {
-        handleClick: function (tab, event) {
-            console.log(tab, event);
-        }
-    },
+    methods: {},
 }
 </script>
 
