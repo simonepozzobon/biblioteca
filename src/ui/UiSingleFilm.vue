@@ -79,7 +79,7 @@ export default {
         shortDescription: function () {
             // https://stackoverflow.com/questions/1199352/smart-way-to-shorten-long-strings-with-javascript
             let n = 130
-            if (this.record.hasOwnProperty('description')) {
+            if (Object.prototype.hasOwnProperty.call(this.record, 'description')) {
                 if (this.record.description.length > 130) {
                     return this.record.description.substr(0, n - 1) + '...'
                 }

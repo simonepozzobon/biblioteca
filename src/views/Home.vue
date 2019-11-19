@@ -1,22 +1,23 @@
 <template>
 <div>
-    <ui-single-film
+    <!-- <ui-single-film
         v-for="(record, i) in records"
         :key="i"
         :record="record"
-    />
+    /> -->
+    home
 </div>
 </template>
 
 <script>
-import {
-    UiSingleFilm
-}
-from '../ui'
+// import {
+//     UiSingleFilm
+// }
+// from '../ui'
 export default {
     name: 'Home',
     components: {
-        UiSingleFilm,
+        // UiSingleFilm,
     },
     data: function () {
         return {

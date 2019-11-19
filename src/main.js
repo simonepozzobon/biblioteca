@@ -38,11 +38,11 @@ router.beforeEach((to, from, next) => {
         // console.log('autorizzazione richiesta');
         // eslint-disable-next-line
         // console.log(store);
-        
+
         const app = router.app
         let user = store.get('user')
         let token = store.get('token')
-        let auth = app.$http.defaults.headers.common.hasOwnProperty('Authorization')
+        let auth = Object.prototype.hasOwnProperty.call(app.$http.defaults.headers.common, 'Authorization')
 
         if (user && token && auth) {
             app.$http.defaults.headers.common.Authorization = `Bearer ${token}`
@@ -50,14 +50,14 @@ router.beforeEach((to, from, next) => {
             console.log('ci sono sia user che token');
             next();
         }
-        
+
         else if (user && (typeof token == 'undefined' || !auth)) {
             // eslint-disable-next-line
             console.log('ce user');
             let data = new FormData()
             data.append('id', user.id)
             data.append('email', user.email)
-            
+
             app.$http.post('auth/get-token', data).then(response => {
                 if (response.data.success) {
                     store.set('user', response.data.user)
@@ -65,15 +65,15 @@ router.beforeEach((to, from, next) => {
                     app.$http.defaults.headers.common.Authorization = `Bearer ${token}`
                     // eslint-disable-next-line
                     console.log('login dal cookie riuscito dal router');
-    
+
                     app.$nextTick(next)
                 }
-    
+
                 else {
                     store.set('user', null)
                     store.set('token', null)
                     delete app.$http.defaults.headers.common.Authorization
-    
+
                     // eslint-disable-next-line
                     console.log('login dal cookie non riuscito');
                     router.push('/')
@@ -86,7 +86,9 @@ router.beforeEach((to, from, next) => {
             // non ci sono ne user ne token -> redirect al login
             // eslint-disable-next-line
             console.log('redirect al login');
-            router.push({ name: 'login' })
+            router.push({
+                name: 'login'
+            })
             return false
         }
     }
@@ -100,21 +102,26 @@ router.beforeEach((to, from, next) => {
 
 new Vue({
     router,
-    data: function() {
+    data: function () {
         return {
             api_base: process.env.VUE_APP_API_BASE,
             base: process.env.VUE_APP_BASE,
         }
     },
     methods: {
-        goToWithParams: function(name, params) {
-            this.$router.push({ name: name, params: params })
+        goToWithParams: function (name, params) {
+            this.$router.push({
+                name: name,
+                params: params
+            })
         },
-        goTo: function(name) {
-            this.$router.push({ name: name })
+        goTo: function (name) {
+            this.$router.push({
+                name: name
+            })
         }
     },
-    mounted: function() {
+    mounted: function () {
         this.$router.push('/')
     },
     render: h => h(App),

@@ -1,5 +1,11 @@
 <template>
-<el-container class="main-container">
+<div>
+    Main template
+    <div class="flex bg-red">
+        Cao
+    </div>
+</div>
+<!-- <el-container class="main-container">
     <el-header class="header">
         <div class="header__title">
             <el-link @click="$root.goTo('home')">
@@ -43,10 +49,11 @@
     <el-footer class="footer">
         <small>www.cinetecamilano.it</small>
     </el-footer>
-</el-container>
+</el-container> -->
 </template>
 
 <script>
+import '../assets/css/tailwind.css'
 export default {
     name: 'MainTemplate',
     data: function () {
@@ -96,64 +103,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss">
-@import '../scss/styles.scss';
-
-.main-container {
-    min-height: 100vh;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: $gray-lightest;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 9999;
-
-    &__title {
-        font-weight: bold;
-    }
-
-    &__logout {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-}
-
-.main {
-    margin-top: 60px;
-}
-
-.logout {
-    margin-right: $spacer;
-}
-
-.avatar {
-    background-color: $gray-lighter;
-    border-radius: 50%;
-    position: relative;
-    height: $spacer * 2 * 1.618;
-    width: $spacer * 2 * 1.618;
-
-    &__initial {
-        position: absolute;
-        font-weight: bold;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-}
-
-.footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $gray-lightest;
-    color: $gray;
-}
-</style>
