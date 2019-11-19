@@ -2,7 +2,6 @@ const _ = require('lodash')
 
 module.exports = function ({
     theme,
-    e,
     addUtilities,
 }) {
     const gradients = theme('gradients', {})

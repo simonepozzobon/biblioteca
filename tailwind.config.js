@@ -1,7 +1,5 @@
 const {
     colors,
-    opacity,
-    borderRadius,
 } = require('tailwindcss/defaultTheme')
 
 module.exports = {
