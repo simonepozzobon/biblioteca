@@ -1,5 +1,7 @@
 const {
     colors,
+    opacity,
+    borderRadius,
 } = require('tailwindcss/defaultTheme')
 
 module.exports = {
@@ -46,8 +48,10 @@ module.exports = {
         gradients: theme => ({
             'transparent': ['transparent', 'transparent'],
             'orange': [theme('colors.orange.500'), theme('colors.orange.400')],
+            'red': [theme('colors.red.500'), theme('colors.red.400')],
             'dark': [theme('colors.dark.500'), theme('colors.dark.300')],
-            'light': [theme('colors.light.300'), theme('colors.light.600')]
+            'light': [theme('colors.light.300'), theme('colors.light.600')],
+            'light-inv': [theme('colors.light.600'), theme('colors.light.300')]
         }),
     },
     variants: {},
