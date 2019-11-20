@@ -58,6 +58,7 @@
                 label="Genere"
                 name="genre"
                 placeholder="Seleziona un genere"
+                :options="$root.genres"
             />
         </div>
         <div class="mt-6">
@@ -65,6 +66,7 @@
                 label="Tema"
                 name="theme"
                 placeholder="Seleziona un percorso tematico"
+                :options="$root.themes"
             />
         </div>
     </div>

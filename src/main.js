@@ -16,7 +16,10 @@ const store = new Store({
     configName: 'user-data',
     defaults: {
         token: '',
-        user: ''
+        user: '',
+        records: [],
+        genres: [],
+        themes: [],
     }
 })
 
@@ -46,6 +49,7 @@ router.beforeEach((to, from, next) => {
 
         if (user && token && auth) {
             app.$http.defaults.headers.common.Authorization = `Bearer ${token}`
+            app.ready = true
             // eslint-disable-next-line
             // console.log('ci sono sia user che token');
             next();
@@ -62,6 +66,7 @@ router.beforeEach((to, from, next) => {
                     store.set('user', response.data.user)
                     store.set('token', response.data.token)
                     app.$http.defaults.headers.common.Authorization = `Bearer ${token}`
+                    app.ready = true
                     // eslint-disable-next-line
                     // console.log('login dal cookie riuscito dal router');
 
@@ -101,8 +106,19 @@ new Vue({
         return {
             api_base: process.env.VUE_APP_API_BASE,
             base: process.env.VUE_APP_BASE,
-            records: []
+            records: [],
+            genres: [],
+            themes: [],
+            totalRecords: 0,
+            ready: false,
         }
+    },
+    watch: {
+        ready: function (value) {
+            if (value === true) {
+                this.getData()
+            }
+        },
     },
     methods: {
         goToWithParams: function (name, params) {
@@ -117,22 +133,27 @@ new Vue({
             })
         },
         getData: function () {
-            if (!this.$store.get('archives')) {
-                this.$store.set('archives', [])
-            }
-            let records = this.$store.get('archives')
-            console.log('records', records);
+            this.records = this.$store.get('records')
+            this.$http.get('catalogo/genre-themes').then(response => {
+                console.log(response);
+                if (response.data.success) {
+                    this.genres = response.data.genre
+                    this.themes = response.data.themes
+                    this.$store.set('genres', this.genres)
+                    this.$store.set('themes', this.themes)
+                }
+            })
             this.$http.get('catalogo').then(response => {
                 console.log(response.data);
                 if (response.data.success) {
                     this.records = response.data.archives
+                    this.totalRecords = response.data.total
+                    this.$store.set('records', this.records)
                 }
             })
         }
     },
-    created: function () {
-        this.getData()
-    },
+    created: function () {},
     mounted: function () {
         this.$router.push('/')
         console.log('mounted');
