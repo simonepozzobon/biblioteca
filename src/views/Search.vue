@@ -15,10 +15,9 @@
             Ricerca Avanzata
         </span>
     </div>
-    <h1 class="mt-3 text-2xl uppercase text-gr-orange font-bold">
+    <h1 class="mt-3 text-4xl uppercase text-gr-orange font-bold">
         Ricerca Avanzata
     </h1>
-    <hr class="mt-1">
     <div class="mt-3">
         <ui-input
             name="title"

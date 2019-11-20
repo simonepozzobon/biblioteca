@@ -1,20 +1,38 @@
 import Home from './views/Home.vue'
+import Lasts from './views/Lasts.vue'
+import Favourites from './views/Favourites.vue'
 import Login from './views/Login.vue'
 import MainTemplate from './containers/MainTemplate.vue'
 import RecordSingle from './views/RecordSingle.vue'
 import Register from './views/Register.vue'
 import Search from './views/Search.vue'
 
-const routes = [
-    {
+const routes = [{
         path: '/',
         component: MainTemplate,
-        children: [
-            {
+        children: [{
                 path: '',
                 name: 'home',
                 component: Home,
-                meta: { requiresAuth: true },
+                meta: {
+                    requiresAuth: true
+                },
+            },
+            {
+                path: 'lasts',
+                name: 'lasts',
+                component: Lasts,
+                meta: {
+                    requiresAuth: true
+                },
+            },
+            {
+                path: 'favourites',
+                name: 'favourites',
+                component: Favourites,
+                meta: {
+                    requiresAuth: true
+                },
             },
             {
                 path: 'login',
@@ -35,11 +53,13 @@ const routes = [
                 path: 'record-single/:id',
                 name: 'record-single',
                 component: RecordSingle,
-                meta: { requiresAuth: true },
+                meta: {
+                    requiresAuth: true
+                },
             }
         ]
     }
-    
+
 ]
 
 export default routes

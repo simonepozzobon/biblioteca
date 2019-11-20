@@ -63,7 +63,7 @@
                 </a>
             </li>
             <li
-                id="menu-ultimi"
+                id="menu-lasts"
                 class="block flex items-center text-light mt-3"
             >
                 <svg
@@ -83,13 +83,16 @@
                 </svg>
                 <a
                     href="#"
-                    @click="$root.goTo('search')"
+                    @click="$root.goTo('lasts')"
                     class="ml-3 text-lg"
                 >
                     Ultimi Arrivi
                 </a>
             </li>
-            <li class="block flex items-center text-light mt-3">
+            <li
+                id="menu-favourites"
+                class="block flex items-center text-light mt-3"
+            >
                 <svg
                     aria-hidden="true"
                     focusable="false"
@@ -107,7 +110,7 @@
                 </svg>
                 <a
                     href="#"
-                    @click="$root.goTo('search')"
+                    @click="$root.goTo('favourites')"
                     class="ml-3 text-lg"
                 >
                     Preferiti
