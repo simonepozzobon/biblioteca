@@ -52,7 +52,6 @@
             </svg>
         </button>
     </div>
-
     <div class="mt-10 flex flex-row">
         <div class="w-8/12 mr-4">
             <ui-title title="Descrizione" />
@@ -61,11 +60,42 @@
                     {{ record.description }}
                 </p>
             </div>
+            <div
+                class="mt-6"
+                v-if="record.themes && record.themes.length > 0"
+            >
+                <p>
+                    Presente nei percorsi:
+                    <span
+                        v-for="theme in record.themes"
+                        :key="theme.id"
+                        class="text-orange mr-1"
+                    >
+                        • <a
+                            href="#"
+                            class="hover:underline"
+                        >
+                            {{ theme.name }}
+                        </a>
+                    </span>
+                </p>
+            </div>
         </div>
         <div class="w-3/12 ml-4">
             <ui-title title="Dettagli" />
             <div class="mt-2">
-                <div v-if="record.country">
+                <div v-if="record.genre">
+                    <span class="block font-semibold">
+                        Genere
+                    </span>
+                    <span class="text-sm">
+                        {{ record.genre.name }}
+                    </span>
+                </div>
+                <div
+                    v-if="record.country"
+                    class="mt-1"
+                >
                     <span class="block font-semibold">
                         Nazione
                     </span>
@@ -181,13 +211,15 @@ export default {
     },
     methods: {
         getData: function () {
-            let url = 'catalogo/' + this.$route.params.id
-            this.$http.get(url).then(response => {
-                if (response.data.success) {
-                    this.record = response.data.archive
-                    // console.log(this.record);
-                }
-            })
+            // let url = 'catalogo/' + this.$route.params.id
+            // this.$http.get(url).then(response => {
+            //     if (response.data.success) {
+            //         this.record = response.data.archive
+            //         // console.log(this.record);
+            //     }
+            // })
+
+            this.record = this.$root.records.find(record => record.id == this.$route.params.id)
         },
         goToHome: function () {
             this.$root.goTo('home')
