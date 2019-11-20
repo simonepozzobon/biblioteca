@@ -12,6 +12,8 @@
                 type="text"
                 placeholder="Cerca..."
                 class="border border-light bg-transparent rounded-lg px-3 py-2 placeholder-light text-light outline-none"
+                v-model="$root.search"
+                @keyup.enter="performSearch"
             >
             <div class="absolute top-0 right-0 mt-3 mr-3">
                 <svg
@@ -157,7 +159,7 @@
         </div>
     </div>
     <div class="w-full py-8 px-16 bg-gray-100 max-h-screen overflow-y-scroll overflow-x-hidden">
-        <router-view></router-view>
+        <router-view :key="$route.fullPath"></router-view>
     </div>
 </div>
 </template>
@@ -168,7 +170,7 @@ export default {
     data: function () {
         return {
             logged: false,
-            name: null
+            name: null,
         }
     },
     computed: {
@@ -224,7 +226,12 @@ export default {
                 this.name = null
                 this.$root.goTo('login')
             })
-        }
+        },
+        performSearch: function () {
+            this.$root.goToWithParams('simple-search', {
+                string: encodeURI(this.$root.search.toLowerCase())
+            })
+        },
     },
     created: function () {
         this.getUser()

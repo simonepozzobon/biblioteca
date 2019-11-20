@@ -6,6 +6,7 @@ import MainTemplate from './containers/MainTemplate.vue'
 import RecordSingle from './views/RecordSingle.vue'
 import Register from './views/Register.vue'
 import Search from './views/Search.vue'
+import SearchResults from './views/SearchResults.vue'
 
 const routes = [{
         path: '/',
@@ -17,6 +18,16 @@ const routes = [{
                 meta: {
                     requiresAuth: true
                 },
+            },
+            {
+                path: 'login',
+                name: 'login',
+                component: Login
+            },
+            {
+                path: 'register',
+                name: 'register',
+                component: Register,
             },
             {
                 path: 'lasts',
@@ -35,16 +46,6 @@ const routes = [{
                 },
             },
             {
-                path: 'login',
-                name: 'login',
-                component: Login
-            },
-            {
-                path: 'register',
-                name: 'register',
-                component: Register,
-            },
-            {
                 path: 'search',
                 name: 'search',
                 component: Search,
@@ -56,6 +57,14 @@ const routes = [{
                 meta: {
                     requiresAuth: true
                 },
+            },
+            {
+                path: 'search/:string',
+                name: 'simple-search',
+                component: SearchResults,
+                meta: {
+                    requiresAuth: true
+                }
             }
         ]
     }

@@ -108,6 +108,7 @@ new Vue({
         return {
             api_base: process.env.VUE_APP_API_BASE,
             base: process.env.VUE_APP_BASE,
+            search: null,
             records: [],
             genres: [],
             themes: [],
