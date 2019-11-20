@@ -68,84 +68,57 @@
                 :options="$root.themes"
             />
         </div>
+        <div class="mt-6">
+            <label class="uppercase tracking-wider font-bold text-gr-dark">
+                Includi nei risultati di ricerca:
+            </label>
+            <ui-checkbox
+                label="Streaming"
+                class="mt-2"
+            />
+            <ui-checkbox
+                label="In videoteca"
+                class="mt-2"
+            />
+            <ui-checkbox
+                label="A pagamento"
+                class="mt-2"
+            />
+        </div>
     </div>
     <div class="mt-8">
         <button class="px-6 py-3 rounded-full gr-orange text-white tracking-wider focus:outline-none">
             Esegui Ricerca Avanzata
         </button>
     </div>
-
-    <ui-single-film
-        v-for="(record, i) in results"
-        :key="i"
-        :record="record"
-    />
 </div>
 </template>
 
 <script>
+import UiCheckbox from '../ui/UiCheckbox.vue'
 import UiInput from '../ui/UiInput.vue'
 import UiSelect from '../ui/UiSelect.vue'
-import {
-    UiSingleFilm
-}
-from '../ui'
+
 export default {
     name: 'Search',
     components: {
-        UiSingleFilm,
+        UiCheckbox,
         UiInput,
         UiSelect,
     },
     data: function () {
         return {
-            activeSearch: 'simple',
-            advanced: false,
-            simple_query: '',
-            title: '',
-            director: '',
-            cast: '',
-            country: '',
-            year: '',
-            genre: '',
-            theme: '',
+            title: null,
+            director: null,
+            cast: null,
+            country: null,
+            year: null,
+            genre: null,
+            theme: null,
             results: [],
         }
     },
-    methods: {
-        search: function () {
-            if (this.simple_query.length > 1) {
-                let data = new FormData()
-                data.append('string', this.simple_query)
-
-                this.$http.post('catalogo/simple-search', data).then(response => {
-                    this.formatResults(response.data)
-                })
-            }
-        },
-        advancedSearch: function () {
-            let data = new FormData()
-            data.append('title', this.title)
-            data.append('director', this.director)
-            data.append('cast', this.cast)
-            data.append('country', this.country)
-            data.append('year', this.year)
-            data.append('genre', this.genre)
-            data.append('theme', this.theme)
-
-            this.$http.post('catalogo/advanced-search', data).then(response => {
-                this.results = response.data
-            })
-        },
-        formatResults: function (results) {
-            let formatted = []
-            for (let i = 0; i < results.length; i++) {
-                formatted.push(results[i].searchable)
-            }
-
-            this.results = formatted
-        }
-    },
+    methods: {},
     created: function () {
         this.$root.current = 'search'
     },
