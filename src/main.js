@@ -1,14 +1,14 @@
 require('dotenv').config()
 import App from './App.vue'
 import axios from 'axios'
-import Element from 'element-ui'
+// import Element from 'element-ui'
 import routes from './routes'
 import Store from './store'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
-Vue.use(Element)
+// Vue.use(Element)
 
 Vue.config.productionTip = false
 

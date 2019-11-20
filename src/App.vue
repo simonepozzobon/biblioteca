@@ -1,10 +1,16 @@
 <template>
-<div id="app">
+<div
+    id="app"
+    class="min-h-screen"
+    style="-webkit-app-region: drag;"
+>
     <router-view />
 </div>
 </template>
 
 <script>
+import './assets/css/tailwind.css'
+
 export default {
     name: 'app',
     components: {},

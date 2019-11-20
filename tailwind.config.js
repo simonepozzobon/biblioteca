@@ -38,13 +38,6 @@ module.exports = {
                 'xl': '1.25rem',
             },
         },
-
-        minHeight: {
-            'slide': 'calc(100vh - 10rem)',
-        },
-        maxHeight: {
-            'slide': 'calc(100vh - 10rem)',
-        },
         gradients: theme => ({
             'transparent': ['transparent', 'transparent'],
             'orange': [theme('colors.orange.500'), theme('colors.orange.400')],

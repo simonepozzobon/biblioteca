@@ -1,10 +1,13 @@
 <template>
-<component
-    :is="tag"
-    class="ui-title"
->
-    {{ title }}
-</component>
+<div>
+    <component
+        :is="tag"
+        class="text-gr-orange uppercase tracking-wider"
+    >
+        {{ title }}
+    </component>
+    <hr class="mt-1">
+</div>
 </template>
 
 <script>

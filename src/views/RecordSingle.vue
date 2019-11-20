@@ -1,85 +1,85 @@
 <template>
-<div class="record-single">
-    <el-breadcrumb
-        separator="/"
-        class="record-single__breadcrumbs"
-    >
-        <el-breadcrumb-item class="record-single__breadcrumb">
-            <el-link @click="goToHome">
-                Home
-            </el-link>
-        </el-breadcrumb-item>
-        <el-breadcrumb-item class="record-single__breadcrumb">
+<div class="pt-24 pb-24 px-8">
+    <div class="flex text-sm text-gray-400 font-light tracking-wider">
+        <a
+            href="#"
+            class="text-dark"
+            @click="$root.goTo('home')"
+        >
+            Home
+        </a>
+        <span class="ml-2">
+            /
+        </span>
+        <span class="ml-2">
             {{ title }}
-        </el-breadcrumb-item>
-    </el-breadcrumb>
-    <el-row
-        :gutter="20"
-        justify="center"
-    >
-        <el-col :span="24">
-            <div class="record-single__image">
-                <div
-                    class="embed-responsive embed-responsive-16by9"
-                    v-if="record.video && record.video.url"
+        </span>
+    </div>
+    <div class="w-full mt-4 overflow-hidden rounded-lg shadow-lg">
+        <iframe
+            v-if="record.video && record.video.url"
+            :src="record.video.url | setUri"
+            allowfullscreen
+        >
+        </iframe>
+        <img
+            v-else
+            :src="record.thumb.slide_img | setPath"
+            class="w-full"
+        >
+    </div>
+    <div class="mt-10">
+        <ui-title title="Dettagli" />
+        <div class="mt-2">
+            <span class="px-2 py-1 rounded-full gr-light-inv text-orange-500 uppercase text-xs tracking-wider font-semibold">
+                {{ record.streaming ? 'streaming' : 'catalogo' }}
+            </span>
+            <div class="inline-block ml-1">
+                <span
+                    v-if="record.country"
+                    class="text-sm text-gray-400 font-semibold"
                 >
-                    <iframe
-                        class="embed-responsive-item"
-                        :src="record.video.url | setUri"
-                        allowfullscreen
-                    >
-                    </iframe>
-                </div>
-                <el-image
-                    v-else-if="record.thumb"
-                    :src="record.thumb.slide_img | setPath"
-                    fit="cover"
-                />
-                <el-image
-                    v-else
-                    :src="archivePlaceholderImg"
-                />
-
+                    • {{ record.country.name }}
+                </span>
+                <span
+                    v-if="record.year"
+                    class="text-sm text-gray-400 font-semibold"
+                >
+                    • {{ record.year }}
+                </span>
+                <span
+                    v-if="record.duration"
+                    class="text-sm text-gray-400 font-semibold"
+                >
+                    • {{ record.duration }}'
+                </span>
             </div>
-        </el-col>
-    </el-row>
-    <el-row
-        :gutter="20"
-        justify="center"
-    >
-        <el-col :span="18">
-            <div class="record-single__options">
-                <ui-title title="Opzioni" />
-                <ui-tags
-                    class="record-single__tags"
-                    :record="record"
-                />
-            </div>
-            <div class="record-single__options">
-                <ui-title title="Descrizione" />
+        </div>
+    </div>
+    <div class="mt-10">
+        <ui-title title="Descrizione" />
+        <div class="mt-2">
+            <p class="leading-relaxed">
                 {{ record.description }}
-            </div>
-        </el-col>
-        <el-col :span="4">
-            <ui-title title="Dettagli" />
-            <span v-if="record.country">{{ record.country.name }}, </span>
-            <span v-if="record.year">{{ record.year }}, </span>
-            <span v-if="record.duration">{{ record.duration }}'</span>
-        </el-col>
-    </el-row>
+            </p>
+        </div>
+    </div>
+    <div>
+        <pre>
+        {{ record }}
+        </pre>
+    </div>
 </div>
 </template>
 
 <script>
 import {
-    UiTags,
     UiTitle
 }
 from '../ui'
 export default {
     name: 'RecordSingle',
     components: {
-        UiTags,
         UiTitle,
     },
     data: function () {
