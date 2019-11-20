@@ -50,7 +50,7 @@
                 </svg>
                 <a
                     href="#"
-                    @click="$root.goTo('search')"
+                    @click="$root.goTo('home')"
                     class="ml-3 text-lg"
                 >
                     Home

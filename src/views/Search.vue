@@ -1,5 +1,65 @@
 <template>
 <div>
+    <div class="text-gray-500 text-sm font-semibold tracking-wide">
+        <a
+            href="#"
+            @click.prevent="$root.goTo('home')"
+            class="hover:text-gray-600"
+        >
+            Home
+        </a>
+        <span>
+            /
+        </span>
+        <span>
+            Ricerca Avanzata
+        </span>
+    </div>
+    <h1 class="mt-3 text-2xl uppercase text-gr-orange font-bold">
+        Ricerca Avanzata
+    </h1>
+    <hr class="mt-1">
+    <div class="mt-3">
+        <ui-input
+            name="title"
+            label="Titolo"
+            placeholder="Titolo"
+        />
+        <div class="flex flex-row">
+            <ui-input
+                name="director"
+                label="Regista"
+                placeholder="Regista"
+                class="mt-6 mr-4 w-6/12"
+            />
+            <ui-input
+                name="cast"
+                label="Cast"
+                placeholder="Cast"
+                class="mt-6 ml-4 w-6/12"
+            />
+        </div>
+        <div class="flex flex-row">
+            <ui-input
+                name="country"
+                label="Paese"
+                placeholder="Paese"
+                class="mt-6 mr-4 w-6/12"
+            />
+            <ui-input
+                name="year"
+                label="Anno"
+                placeholder="Anno"
+                class="mt-6 ml-4 w-6/12"
+            />
+        </div>
+    </div>
+    <div class="mt-4">
+        <button class="px-6 py-3 rounded-full gr-orange text-white tracking-wider focus:outline-none">
+            Esegui Ricerca Avanzata
+        </button>
+    </div>
+
     <el-row class="section-container">
         <el-col
             :span="8"
@@ -7,48 +67,9 @@
         >
             <el-tabs v-model="activeSearch">
                 <el-tab-pane
-                    label="Ricerca Semplice"
-                    name="simple"
-                >
-                    <el-input
-                        class="form__input"
-                        placeholder="Ricerca..."
-                        v-model="simple_query"
-                        clearable
-                    />
-                    <el-button
-                        type="primary"
-                        @click="search"
-                    >
-                        Esegui Ricerca
-                    </el-button>
-                    <el-button
-                        type="warning"
-                        @click="$root.goTo('home')"
-                    >
-                        Torna al catalogo
-                    </el-button>
-                </el-tab-pane>
-                <el-tab-pane
                     label="Ricerca Avanzata"
                     name="advanced"
                 >
-
-                    <p class="color-info">
-                        <i class="el-icon-info"></i> Non è necessario compilare tutti i campi.
-                    </p>
-                    <el-input
-                        class="form__input"
-                        placeholder="Titolo"
-                        v-model="title"
-                        clearable
-                    />
-                    <el-input
-                        class="form__input"
-                        placeholder="Regista"
-                        v-model="director"
-                        clearable
-                    />
                     <el-row :gutter="20">
                         <el-col :span="12">
                             <el-select
@@ -75,12 +96,6 @@
                             </el-select>
                         </el-col>
                     </el-row>
-                    <el-input
-                        class="form__input"
-                        placeholder="Cast"
-                        v-model="cast"
-                        clearable
-                    />
                     <el-input
                         class="form__input"
                         placeholder="Nazionalità"
@@ -123,6 +138,7 @@
 </template>
 
 <script>
+import UiInput from '../ui/UiInput.vue'
 import {
     UiSingleFilm
 }
@@ -131,6 +147,7 @@ export default {
     name: 'Search',
     components: {
         UiSingleFilm,
+        UiInput,
     },
     data: function () {
         return {
