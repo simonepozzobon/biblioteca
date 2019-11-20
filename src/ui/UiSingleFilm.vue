@@ -1,10 +1,12 @@
 <template>
 <div class="flex flex-row mt-6">
-    <div class="w-3/12 pointer overflow-hidden rounded-lg shadow-md">
-        <img
-            :src="record.thumb.landscape | setPath"
-            class="object-cover"
-        >
+    <div class="w-3/12 pointer">
+        <div class="overflow-hidden rounded-lg shadow-md">
+            <img
+                :src="record.thumb.landscape | setPath"
+                class="object-cover"
+            >
+        </div>
     </div>
     <div class="w-8/12 ml-6">
         <div class="tracking-wide font-bold text-dark text-xl">
