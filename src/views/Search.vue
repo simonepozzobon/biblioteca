@@ -25,120 +25,66 @@
             label="Titolo"
             placeholder="Titolo"
         />
-        <div class="flex flex-row">
+        <div class="flex flex-row mt-6">
             <ui-input
                 name="director"
                 label="Regista"
                 placeholder="Regista"
-                class="mt-6 mr-4 w-6/12"
+                class="mr-4 w-6/12"
             />
             <ui-input
                 name="cast"
                 label="Cast"
                 placeholder="Cast"
-                class="mt-6 ml-4 w-6/12"
+                class="ml-4 w-6/12"
             />
         </div>
-        <div class="flex flex-row">
+        <div class="flex flex-row mt-6">
             <ui-input
                 name="country"
                 label="Paese"
                 placeholder="Paese"
-                class="mt-6 mr-4 w-6/12"
+                class="mr-4 w-6/12"
             />
             <ui-input
                 name="year"
                 label="Anno"
                 placeholder="Anno"
-                class="mt-6 ml-4 w-6/12"
+                class="ml-4 w-6/12"
+            />
+        </div>
+        <div class="mt-6">
+            <ui-select
+                label="Genere"
+                name="genre"
+                placeholder="Seleziona un genere"
+            />
+        </div>
+        <div class="mt-6">
+            <ui-select
+                label="Tema"
+                name="theme"
+                placeholder="Seleziona un percorso tematico"
             />
         </div>
     </div>
-    <div class="mt-4">
+    <div class="mt-8">
         <button class="px-6 py-3 rounded-full gr-orange text-white tracking-wider focus:outline-none">
             Esegui Ricerca Avanzata
         </button>
     </div>
 
-    <el-row class="section-container">
-        <el-col
-            :span="8"
-            :offset="8"
-        >
-            <el-tabs v-model="activeSearch">
-                <el-tab-pane
-                    label="Ricerca Avanzata"
-                    name="advanced"
-                >
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <el-select
-                                class="form__input"
-                                v-model="genre"
-                                placeholder="Genere"
-                            >
-                                <el-option value="test">Test</el-option>
-                                <el-option value="test">Test</el-option>
-                                <el-option value="test">Test</el-option>
-                                <el-option value="test">Test</el-option>
-                            </el-select>
-                        </el-col>
-                        <el-col :span="12">
-                            <el-select
-                                class="form__input"
-                                v-model="theme"
-                                placeholder="Percorso Tematico"
-                            >
-                                <el-option value="test">Test</el-option>
-                                <el-option value="test">Test</el-option>
-                                <el-option value="test">Test</el-option>
-                                <el-option value="test">Test</el-option>
-                            </el-select>
-                        </el-col>
-                    </el-row>
-                    <el-input
-                        class="form__input"
-                        placeholder="Nazionalità"
-                        v-model="country"
-                        clearable
-                    />
-                    <el-input
-                        class="form__input"
-                        placeholder="Anno di produzione"
-                        v-model="year"
-                        clearable
-                    />
-
-                    <el-button
-                        type="primary"
-                        @click="advancedSearch"
-                    >
-                        Esegui Ricerca Avanzata
-                    </el-button>
-                    <el-button
-                        type="warning"
-                        @click="$root.goTo('home')"
-                    >
-                        Torna al catalogo
-                    </el-button>
-                </el-tab-pane>
-            </el-tabs>
-        </el-col>
-    </el-row>
-    <el-row class="section-container">
-        <el-col :span="24">
-            <ui-single-film
-                v-for="(record, i) in results"
-                :key="i"
-                :record="record"
-            />
-        </el-col>
-    </el-row>
+    <ui-single-film
+        v-for="(record, i) in results"
+        :key="i"
+        :record="record"
+    />
 </div>
 </template>
 
 <script>
 import UiInput from '../ui/UiInput.vue'
+import UiSelect from '../ui/UiSelect.vue'
 import {
     UiSingleFilm
 }
@@ -148,6 +94,7 @@ export default {
     components: {
         UiSingleFilm,
         UiInput,
+        UiSelect,
     },
     data: function () {
         return {
