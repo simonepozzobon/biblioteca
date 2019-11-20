@@ -8,27 +8,35 @@
         >
             Home
         </a>
-        <span>
-            /
-        </span>
-        <span>
-            Ricerca Avanzata
-        </span>
+
     </div>
-    <ui-single-film
+    <div style="-webkit-app-region: no-drag;">
+        <ui-featured-slider title="In Evidenza" />
+        <ui-small-featured-slider
+            v-for="genre in this.$root.featuredGenres"
+            :key="genre.id"
+            :item="genre"
+            class="mt-6"
+        />
+    </div>
+    <!-- <ui-single-film
         v-for="(record, i) in records"
         :key="i"
         :record="record"
-    />
+    /> -->
 </div>
 </template>
 
 <script>
-import UiSingleFilm from '../ui/UiSingleFilm.vue'
+// import UiSingleFilm from '../ui/UiSingleFilm.vue'
+import UiSmallFeaturedSlider from '../ui/UiSmallFeaturedSlider.vue'
+import UiFeaturedSlider from '../ui/UiFeaturedSlider.vue'
 export default {
     name: 'Home',
     components: {
-        UiSingleFilm,
+        // UiSingleFilm,
+        UiSmallFeaturedSlider,
+        UiFeaturedSlider,
     },
     data: function () {
         return {

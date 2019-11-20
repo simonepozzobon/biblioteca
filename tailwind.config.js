@@ -37,6 +37,11 @@ module.exports = {
             borderRadius: {
                 'xl': '1.25rem',
             },
+            opacity: {
+                ...opacity,
+                '90': '.9',
+                '96': '.96',
+            },
         },
         gradients: theme => ({
             'transparent': ['transparent', 'transparent'],

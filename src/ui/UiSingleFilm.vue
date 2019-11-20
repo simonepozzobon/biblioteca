@@ -52,72 +52,12 @@
         </div>
     </div>
 </div>
-<!-- <el-row
-    class="ui-single-film"
-    align="top"
-    justify="space-between"
-    :gutter="20"
->
-    <el-col :span="4">
-        <div
-            class="image-container"
-            @click="goToRecord"
-        >
-            <el-image
-                fit="cover"
-                :src="record.thumb.landscape | setPath"
-                v-if="record.thumb"
-            />
-            <ui-archive-placeholder v-else />
-            <div class="image-container__overlay">
-                <ui-play-button v-if="record.streaming" />
-                <ui-archive-button v-else />
-            </div>
-        </div>
-
-    </el-col>
-    <el-col :span="20">
-        <div class="ui-single-film__title">
-            <el-link
-                :underline="false"
-                type="primary"
-                @click="goToRecord"
-            >
-                <h1>{{ record.title }}</h1>
-            </el-link>
-        </div>
-        <ui-tags
-            :record="record"
-            class="ui-single-film__tags"
-        />
-        <div class="ui-single-film__details">
-            <small>
-                <span v-if="record.country">{{ record.country.name }}, </span>
-                <span v-if="record.year">{{ record.year }} </span>
-                <span v-if="record.duration">{{ record.duration }}'</span>
-            </small>
-        </div>
-        <div class="ui-single-film__description">
-            {{ shortDescription }}
-        </div>
-    </el-col>
-</el-row> -->
 </template>
 
 <script>
-// import UiArchiveButton from './UiArchiveButton.vue'
-// import UiArchivePlaceholder from './UiArchivePlaceholder.vue'
-// import UiPlayButton from './UiPlayButton.vue'
-// import UiTags from './UiTags.vue'
-
 export default {
     name: 'UiSingleFilm',
-    components: {
-        // UiArchiveButton,
-        // UiArchivePlaceholder,
-        // UiPlayButton,
-        // UiTags,
-    },
+    components: {},
     props: {
         record: {
             type: Object,

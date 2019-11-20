@@ -1,5 +1,5 @@
 <template>
-<div class="pt-24 pb-24 px-8">
+<div class="pb-24 px-8">
     <div class="flex text-sm text-gray-400 font-light tracking-wider">
         <a
             href="#"
@@ -15,6 +15,9 @@
             {{ title }}
         </span>
     </div>
+    <h1 class="mt-3 text-2xl uppercase text-gr-orange font-bold">
+        Film: {{ record.title }}
+    </h1>
     <div class="w-full mt-4 overflow-hidden rounded-lg shadow-lg">
         <iframe
             v-if="record.video && record.video.url"
@@ -145,6 +148,7 @@ export default {
     },
     created: function () {
         this.getData()
+        this.$root.current = null
     },
 }
 </script>

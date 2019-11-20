@@ -153,7 +153,7 @@
             </div>
         </div>
     </div>
-    <div class="w-full p-8 bg-gray-100 max-h-screen overflow-y-scroll">
+    <div class="w-full py-8 px-16 bg-gray-100 max-h-screen overflow-y-scroll overflow-x-hidden">
         <router-view></router-view>
     </div>
 </div>

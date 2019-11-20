@@ -20,6 +20,8 @@ const store = new Store({
         records: [],
         genres: [],
         themes: [],
+        featuredGenres: [],
+        featuredThemes: [],
     }
 })
 
@@ -112,6 +114,8 @@ new Vue({
             totalRecords: 0,
             ready: false,
             current: null,
+            featuredGenres: [],
+            featuredThemes: [],
         }
     },
     watch: {
@@ -135,8 +139,9 @@ new Vue({
         },
         getData: function () {
             this.records = this.$store.get('records')
+            this.featuredGenres = this.$store.get('featuredGenres')
+            this.featuredThemes = this.$store.get('featuredThemes')
             this.$http.get('catalogo/genre-themes').then(response => {
-                console.log(response);
                 if (response.data.success) {
                     this.genres = response.data.genre
                     this.themes = response.data.themes
@@ -145,13 +150,91 @@ new Vue({
                 }
             })
             this.$http.get('catalogo').then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 if (response.data.success) {
                     this.records = response.data.archives
                     this.totalRecords = response.data.total
                     this.$store.set('records', this.records)
+
+                    this.filterRecords()
                 }
             })
+        },
+        filterRecords: function () {
+            for (let i = 0; i < this.records.length; i++) {
+                let current = this.records[i]
+                this.addGenre(current)
+                this.addThemes(current)
+            }
+
+            this.addRecordsArrays()
+        },
+        addRecordsArrays: function () {
+            for (let i = 0; i < this.themes.length; i++) {
+                if (!this.themes[i].hasOwnProperty('records')) {
+                    this.themes[i].records = []
+                }
+            }
+
+            for (let i = 0; i < this.genres.length; i++) {
+                if (!this.genres[i].hasOwnProperty('records')) {
+                    this.genres[i].records = []
+                }
+            }
+
+            this.sortGenresAndThemes()
+        },
+        sortGenresAndThemes: function () {
+            this.themes.sort((a, b) => {
+                return a.records.length - b.records.length
+            }).reverse()
+
+            this.genres.sort((a, b) => {
+                return a.records.length - b.records.length
+            }).reverse()
+
+            let featured = []
+            let maxFeatured = 10
+            for (let i = 0; i < this.themes.length; i++) {
+                let current = this.themes[i]
+                if (current.records.length > 0 && featured.length <= maxFeatured) {
+                    featured.push(current.records[0])
+                }
+            }
+            this.featuredThemes = featured
+            this.$store.set('featuredThemes', this.featuredThemes)
+
+            this.featuredGenres = this.genres.slice(0, 10)
+            for (let i = 0; i < this.featuredGenres.length; i++) {
+                this.featuredGenres[i].records = this.featuredGenres[i].records.slice(0, 10)
+            }
+
+            this.$store.set('featuredGenres', this.featuredGenres)
+        },
+        addGenre: function (obj) {
+            let idx = this.genres.findIndex(genre => genre.id == obj.genre_id)
+            if (idx > -1) {
+                if (this.genres[idx].hasOwnProperty('records')) {
+                    this.genres[idx].records.push(obj)
+                }
+                else {
+                    this.genres[idx].records = [obj]
+                }
+            }
+        },
+        addThemes: function (obj) {
+            for (let i = 0; i < obj.themes.length; i++) {
+                let current = obj.themes[i]
+                let idx = this.themes.findIndex(theme => theme.id == current.id)
+                if (idx > -1) {
+                    if (this.themes[idx].hasOwnProperty('records')) {
+                        this.themes[idx].records.push(obj)
+                    }
+                    else {
+                        this.themes[idx].records = [obj]
+                    }
+                }
+            }
         }
     },
     created: function () {},
