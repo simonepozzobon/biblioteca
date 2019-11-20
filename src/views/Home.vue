@@ -22,11 +22,7 @@ export default {
     },
     methods: {
         getData: function () {
-            this.$http.get('catalogo').then(response => {
-                if (response.data.success) {
-                    this.records = response.data.archives
-                }
-            })
+            this.records = this.$root.records
         }
     },
     created: function () {
