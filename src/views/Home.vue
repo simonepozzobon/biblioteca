@@ -1,5 +1,20 @@
 <template>
-<div class="px-8">
+<div>
+    <div class="text-gray-500 text-sm font-semibold tracking-wide">
+        <a
+            href="#"
+            @click.prevent="$root.goTo('home')"
+            class="hover:text-gray-600"
+        >
+            Home
+        </a>
+        <span>
+            /
+        </span>
+        <span>
+            Ricerca Avanzata
+        </span>
+    </div>
     <ui-single-film
         v-for="(record, i) in records"
         :key="i"
@@ -27,6 +42,7 @@ export default {
     },
     created: function () {
         this.getData()
+        this.$root.current = 'home'
     },
 }
 </script>

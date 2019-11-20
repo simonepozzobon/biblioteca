@@ -111,6 +111,7 @@ new Vue({
             themes: [],
             totalRecords: 0,
             ready: false,
+            current: null,
         }
     },
     watch: {

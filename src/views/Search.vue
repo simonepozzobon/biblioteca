@@ -147,14 +147,8 @@ export default {
             this.results = formatted
         }
     },
+    created: function () {
+        this.$root.current = 'search'
+    },
 }
 </script>
-
-<style lang="scss" scoped>
-@import '../scss/styles.scss';
-
-.section-container {
-    margin-bottom: $spacer;
-    // background-color: $black;
-}
-</style>

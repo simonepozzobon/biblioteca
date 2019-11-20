@@ -31,8 +31,14 @@
                 </svg>
             </div>
         </div>
-        <ul class="mt-6">
-            <li class="block flex items-center text-light">
+        <ul
+            class="mt-6 menu"
+            ref="menu"
+        >
+            <li
+                id="menu-home"
+                class="block flex items-center text-light"
+            >
                 <svg
                     aria-hidden="true"
                     focusable="false"
@@ -56,7 +62,10 @@
                     Home
                 </a>
             </li>
-            <li class="block flex items-center text-light mt-3">
+            <li
+                id="menu-ultimi"
+                class="block flex items-center text-light mt-3"
+            >
                 <svg
                     aria-hidden="true"
                     focusable="false"
@@ -104,7 +113,10 @@
                     Preferiti
                 </a>
             </li>
-            <li class="block flex items-center text-light mt-3">
+            <li
+                id="menu-search"
+                class="block flex items-center text-light mt-3"
+            >
                 <svg
                     aria-hidden="true"
                     focusable="false"
@@ -167,9 +179,28 @@ export default {
     watch: {
         '$route.params': function () {
             this.getUser()
+        },
+        '$root.current': function () {
+            this.setActive()
         }
     },
     methods: {
+        setActive: function () {
+            let menu = this.$refs.menu
+            if (menu) {
+                let items = menu.getElementsByClassName('menu-active')
+
+                for (let i = 0; i < items.length; i++) {
+                    items[i].classList.remove('menu-active')
+                }
+
+                let current = this.$root.current
+                if (current != null) {
+                    let item = document.getElementById(`menu-${current}`)
+                    item.classList.add('menu-active')
+                }
+            }
+        },
         getUser: function () {
             if (this.$store.get('user')) {
                 this.logged = true
@@ -178,6 +209,8 @@ export default {
             else {
                 this.logged = false
             }
+
+            this.setActive()
         },
         logout: function () {
             this.$http.get('auth/logout').then(() => {
@@ -192,8 +225,17 @@ export default {
     },
     created: function () {
         this.getUser()
-
-
     },
+    mounted: function () {
+        this.$nextTick(() => {
+            this.setActive()
+        })
+    }
 }
 </script>
+
+<style lang="scss">
+.menu-active {
+    @apply text-orange;
+}
+</style>
