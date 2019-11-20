@@ -1,5 +1,5 @@
 <template>
-<div class="pb-24 px-8">
+<div class="pb-24">
     <div class="flex text-sm text-gray-400 font-light tracking-wider">
         <a
             href="#"
@@ -18,7 +18,7 @@
     <h1 class="mt-3 text-2xl uppercase text-gr-orange font-bold">
         Film: {{ record.title }}
     </h1>
-    <div class="w-full mt-4 overflow-hidden rounded-lg shadow-lg">
+    <div class="relative w-full mt-4 overflow-hidden rounded-lg shadow-lg">
         <iframe
             v-if="record.video && record.video.url"
             :src="record.video.url | setUri"
@@ -26,51 +26,98 @@
         >
         </iframe>
         <img
-            v-else
+            v-else-if="record.thumb"
             :src="record.thumb.slide_img | setPath"
             class="w-full"
         >
+        <span v-else>Error image</span>
+        <div class="absolute z-10 bottom-0 right-0 mr-4 mb-4 gr-light px-4 py-1 rounded-full text-orange shadow-md uppercase tracking-wider text-xs">
+            {{ record.streaming ? 'streaming' : 'catalogo' }}
+        </div>
+        <button class="absolute z-10 bottom-0 left-0 ml-4 mb-4 px-2 py-2 rounded-full border-orange border text-orange focus:outline-none hover:gr-orange hover:text-white">
+            <svg
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="fal"
+                data-icon="star"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 576 512"
+                class="w-4"
+            >
+                <path
+                    d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM405.8 317.9l27.8 162L288 403.5 142.5 480l27.8-162L52.5 203.1l162.7-23.6L288 32l72.8 147.5 162.7 23.6-117.7 114.8z"
+                    class="fill-current"
+                ></path>
+            </svg>
+        </button>
     </div>
-    <div class="mt-10">
-        <ui-title title="Dettagli" />
-        <div class="mt-2">
-            <span class="px-2 py-1 rounded-full gr-light-inv text-orange-500 uppercase text-xs tracking-wider font-semibold">
-                {{ record.streaming ? 'streaming' : 'catalogo' }}
-            </span>
-            <div class="inline-block ml-1">
-                <span
-                    v-if="record.country"
-                    class="text-sm text-gray-400 font-semibold"
-                >
-                    • {{ record.country.name }}
-                </span>
-                <span
-                    v-if="record.year"
-                    class="text-sm text-gray-400 font-semibold"
-                >
-                    • {{ record.year }}
-                </span>
-                <span
-                    v-if="record.duration"
-                    class="text-sm text-gray-400 font-semibold"
-                >
-                    • {{ record.duration }}'
-                </span>
+
+    <div class="mt-10 flex flex-row">
+        <div class="w-8/12 mr-4">
+            <ui-title title="Descrizione" />
+            <div class="mt-2">
+                <p class="leading-relaxed">
+                    {{ record.description }}
+                </p>
             </div>
         </div>
-    </div>
-    <div class="mt-10">
-        <ui-title title="Descrizione" />
-        <div class="mt-2">
-            <p class="leading-relaxed">
-                {{ record.description }}
-            </p>
+        <div class="w-3/12 ml-4">
+            <ui-title title="Dettagli" />
+            <div class="mt-2">
+                <div v-if="record.country">
+                    <span class="block font-semibold">
+                        Nazione
+                    </span>
+                    <span class="text-sm">
+                        {{ record.country.name }}
+                    </span>
+                </div>
+                <div
+                    v-if="record.year"
+                    class="mt-1"
+                >
+                    <span class="block font-semibold">
+                        Anno
+                    </span>
+                    <span class="text-sm">
+                        {{ record.year }}
+                    </span>
+                </div>
+                <div
+                    v-if="record.duration"
+                    class="mt-1"
+                >
+                    <span class="block font-semibold">
+                        Durata
+                    </span>
+                    <span class="text-sm">
+                        {{ record.duration }}
+                    </span>
+                </div>
+                <div class="mt-1">
+                    <span class="block font-semibold">
+                        Regista
+                    </span>
+                    <span class="text-sm">
+                        {{ record.director.name }}
+                    </span>
+                </div>
+                <div class="mt-1">
+                    <span class="block font-semibold">
+                        Cast
+                    </span>
+                    <span class="text-sm">
+                        <span
+                            v-for="(actor, i) in record.actors"
+                            :key="i"
+                        >
+                            {{ actor.name }},
+                        </span>
+                    </span>
+                </div>
+            </div>
         </div>
-    </div>
-    <div>
-        <pre>
-        {{ record }}
-        </pre>
     </div>
 </div>
 </template>
