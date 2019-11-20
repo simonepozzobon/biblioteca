@@ -12,7 +12,7 @@
                 <div class="overflow-hidden rounded-lg shadow-lg">
                     <img
                         :src="record.thumb.landscape | setPath"
-                        alt=""
+                        :alt="record.title"
                     >
                 </div>
                 <div class="absolute w-full bottom-0 opacity-96 cursor-pointer">
