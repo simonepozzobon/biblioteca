@@ -141,7 +141,7 @@
             </div>
         </div>
     </div>
-    <div class="w-full p-8 bg-gray-100">
+    <div class="w-full p-8 bg-gray-100 max-h-screen overflow-y-scroll">
         <router-view></router-view>
     </div>
 </div>
