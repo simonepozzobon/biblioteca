@@ -19,11 +19,6 @@
             class="mt-6"
         />
     </div>
-    <!-- <ui-single-film
-        v-for="(record, i) in records"
-        :key="i"
-        :record="record"
-    /> -->
 </div>
 </template>
 

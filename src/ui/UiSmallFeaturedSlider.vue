@@ -17,7 +17,10 @@
                 </div>
                 <div class="absolute w-full bottom-0 opacity-96 cursor-pointer">
                     <div class="gr-dark p-4 rounded-lg">
-                        <h2 class="capitalize font-semibold text-light tracking-wide hover:text-orange">
+                        <h2
+                            class="capitalize font-semibold text-light tracking-wide hover:text-orange"
+                            @click.prevent.stop="goToRecord(record)"
+                        >
                             {{ record.title | shortTitle }}
                         </h2>
                     </div>
@@ -65,6 +68,13 @@ export default {
             }
         }
     },
+    methods: {
+        goToRecord: function (item) {
+            this.$root.goToWithParams('record-single', {
+                id: item.id
+            })
+        },
+    },
     filters: {
         setPath: function (path) {
             let url = '/storage' + path.replace('/public', '')
@@ -80,63 +90,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss">
-.swiper-container {
-    width: 100%;
-    list-style: none;
-    z-index: 1;
-}
-
-.swiper-wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    transform: translate3d(0px, 0, 0);
-}
-
-.swiper-slide {
-    flex-shrink: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.swiper-pagination {
-    z-index: 10;
-
-    .swiper-pagination-bullet + .swiper-pagination-bullet {
-        margin-left: 8px;
-    }
-}
-
-.swiper-pagination-bullet {
-    width: 8px;
-    height: 8px;
-    display: inline-block;
-    border-radius: 100%;
-    @apply bg-gray-400;
-    opacity: 1;
-    transition: background-color 0.2s ease-in-out;
-
-    &:focus {
-        outline: none;
-    }
-}
-
-.swiper-pagination-bullet-active {
-    @apply bg-red-500;
-    transition: background-color 0.2s ease-in-out;
-}
-
-/* IE10 Windows Phone 8 Fixes */
-.swiper-container-wp8-horizontal,
-.swiper-container-wp8-horizontal > .swiper-wrapper {
-    -ms-touch-action: pan-y;
-    touch-action: pan-y;
-}
-.swiper-container-wp8-vertical,
-.swiper-container-wp8-vertical > .swiper-wrapper {
-    -ms-touch-action: pan-x;
-    touch-action: pan-x;
-}
-</style>
